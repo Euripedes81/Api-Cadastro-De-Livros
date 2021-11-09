@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "BoKXm81aSfCkp0cUp0TMDqWYtGDL1DTFJbyuNGH0AX0o7++OKeL0EICm+LQnsOhRzG7rQQveGOOUnmR2Eces3A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\euripedesgf\\source\\repos\\ApiCadastroDeLivros\\ApiCadastroDeLivros\\ApiCadastroDeLivros.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\euripedesgf\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\euripedesgf\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\euripedesgf\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\euripedesgf\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\euripedesgf\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\euripedesgf\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
