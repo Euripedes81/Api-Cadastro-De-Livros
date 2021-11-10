@@ -30,7 +30,7 @@ namespace ApiCadastroDeLivros
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IService<LivroViewModel>, LivroService>();
+            services.AddScoped<ILivroService, LivroService>();
             services.AddScoped<IRepository<Livro>, LivroRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

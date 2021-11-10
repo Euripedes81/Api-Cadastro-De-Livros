@@ -8,14 +8,12 @@ namespace ApiCadastroDeLivros.InputModel
 {
     public class LivroInputModel
     {
-        [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "O nome do jogo deve conter entre 3 e 100 caracteres")]
-        public string Nome { get; set; }
-        [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "O nome do jogo deve conter entre 3 e 100 caracteres")]
+        [Required(ErrorMessage = "O Campo Nome é Obrigatório!")]
+        public string Nome { get; set; }       
         public DateTime DataLancamento { get; set; }
-        [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "O nome do jogo deve conter entre 3 e 100 caracteres")]
-        public AutorInputModel AutorLivro { get; set; }
+
+        public int IdAutor { get; set; }
+        //[Required(ErrorMessage = "O Campo Autor é Obrigatório!")] 
+        //public AutorInputModel AutorLivro { get; set; }
     }
 }

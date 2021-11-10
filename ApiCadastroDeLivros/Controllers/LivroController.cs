@@ -15,9 +15,9 @@ namespace ApiCadastroDeLivros.Controllers
     [ApiController]
     public class LivroController : ControllerBase
     {
-        private readonly IService<LivroViewModel>_livroService;
+        private readonly ILivroService _livroService;
 
-        public LivroController(IService<LivroViewModel> livroService)
+        public LivroController(ILivroService livroService)
         {
             _livroService = livroService;
         }
@@ -33,7 +33,7 @@ namespace ApiCadastroDeLivros.Controllers
             return Ok(livros);
         }
         [HttpGet("{idLivro}")]
-        public async Task<ActionResult<LivroViewModel>> Obter(/*[FromRoute]*/ int idLivro)
+        public async Task<ActionResult<LivroViewModel>> Obter([FromRoute] int idLivro)
         {
             var livro = await _livroService.Obter(idLivro);
             if(livro == null)
@@ -44,11 +44,11 @@ namespace ApiCadastroDeLivros.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<LivroViewModel>> InserirLivro([FromBody] LivroViewModel livroViewModel)
+        public async Task<ActionResult<LivroViewModel>> InserirLivro([FromBody] LivroInputModel livroInputModel)
         {
             try
             {
-                var livro = await _livroService.Inserir(livroViewModel);
+                var livro = await _livroService.Inserir(livroInputModel);
                 return base.Ok((object)livro);
             }
             catch (Exception ex)
@@ -56,5 +56,20 @@ namespace ApiCadastroDeLivros.Controllers
                 return null;
             }
         }
+        [HttpPut("{idLivro}")]
+        public async Task<ActionResult> AtualizarLivro ([FromRoute] int idLivro, [FromBody] LivroInputModel livro)
+        {
+            try
+            {
+               await _livroService.Atualizar(idLivro, livro);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return NotFound("Não existe este Livro");
+            }
+        }
+
     }
 }

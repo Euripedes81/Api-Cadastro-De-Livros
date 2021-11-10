@@ -9,7 +9,7 @@ namespace ApiCadastroDeLivros.Repositories
     public interface IRepository<ENT> : IDisposable
     {
         Task<List<ENT>> Obter(int pagina, int quantidade);
-        Task<List<ENT>> Obter(string nome1, string nome2);
+        Task<List<ENT>> Obter(string nome);
         Task<ENT> Obter(int id);
         Task Inserir(ENT objeto);
         Task Atualizar(ENT objeto);       

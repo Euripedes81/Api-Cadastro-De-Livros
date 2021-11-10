@@ -9,10 +9,7 @@ namespace ApiCadastroDeLivros.Services
     public interface IService<TVM> : IDisposable
     {
         Task<List<TVM>> Obter(int pagina, int quantidade);
-        Task<TVM> Obter(int id);
-        Task<TVM> Inserir(TVM objeto);
-        Task Atualizar(int id, TVM objeto);
-        Task Atualizar(int id, double preco);
+        Task<TVM> Obter(int id);    
         Task Remover(int id);
     }
 }
