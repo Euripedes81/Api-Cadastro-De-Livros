@@ -42,14 +42,14 @@ namespace ApiCadastroDeLivros.Repositories
         {
             livros[livro.Id] = livro;
             return Task.CompletedTask;
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        }      
 
         public Task Remover(int id)
+        {
+            livros.Remove(id);
+            return Task.CompletedTask;
+        }
+        public void Dispose()
         {
             throw new NotImplementedException();
         }

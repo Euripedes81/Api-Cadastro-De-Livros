@@ -84,19 +84,19 @@ namespace ApiCadastroDeLivros.Services
             entidadeLivro.AutorLivro = new Autor { Id = livro.IdAutor};
             await _livroRepository.Atualizar(entidadeLivro);
         }
-
-        public Task Atualizar(int id, double preco)
-        {
-            throw new NotImplementedException();
-        }
        
-        public Task Remover(int id)
+        public async Task Remover(int id)
         {
-            throw new NotImplementedException();
+            var livro = await _livroRepository.Obter(id);
+            if(livro == null)
+            {
+                throw new NotImplementedException();
+            }
+            await _livroRepository.Remover(id);
         }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _livroRepository?.Dispose();
         }
        
     }

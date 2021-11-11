@@ -70,6 +70,20 @@ namespace ApiCadastroDeLivros.Controllers
                 return NotFound("Não existe este Livro");
             }
         }
+        [HttpDelete("{idLivro}")]
+        public async Task<ActionResult> ApagarLivro([FromRoute] int idLivro)
+        {
+            try
+            {
+                await _livroService.Remover(idLivro);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return NotFound("Não existe este livro.");
+            }
+        }
 
     }
 }
