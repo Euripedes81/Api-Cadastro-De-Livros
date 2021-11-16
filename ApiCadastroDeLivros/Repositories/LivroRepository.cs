@@ -1,6 +1,8 @@
 ﻿using ApiCadastroDeLivros.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,51 +10,117 @@ namespace ApiCadastroDeLivros.Repositories
 {
     public class LivroRepository : IRepository<Livro>
     {
-        private static Dictionary<int, Livro> livros = new Dictionary<int, Livro>()
-        {
-            { 1, new Livro {Id = 1, Nome = "A Revolução dos Bichos", DataLancamento = new DateTime( 1950, 01, 01) , AutorLivro = new Autor {Id = 1, Nome = "George Orwell" } } },
-            { 2, new Livro {Id = 2, Nome = "1984", DataLancamento = new DateTime( 1950, 01, 01) , AutorLivro = new Autor {Id = 1, Nome = "George Orwell" } } },
-            { 3, new Livro {Id = 3, Nome = "Ditadura à brasileira", DataLancamento = new DateTime( 1950, 01, 01) , AutorLivro = new Autor {Id = 2, Nome = "Marco Antônio Villa" } } }
-        };     
-              
-        public Task<List<Livro>> Obter(int pagina, int quantidade)
-        {
-            return Task.FromResult(livros.Values.Skip((pagina - 1) * quantidade).Take(quantidade).ToList());
-        }
+        private readonly SqlConnection sqlConnection;
 
-        public Task<Livro> Obter(int id)
+        public LivroRepository(IConfiguration configuration)
         {
-            if (!livros.ContainsKey(id))
-            {
-                return Task.FromResult<Livro>(null);
+            sqlConnection = new SqlConnection(configuration.GetConnectionString("Default"));
+        }
+        public async Task<List<Livro>> Obter(int pagina, int quantidade)
+        {
+            var livros = new List<Livro>();
+            var comando = $"select * from Livro order by Livro.Id offset {((pagina - 1) * quantidade)} rows fetch next {quantidade} rows only";
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+            while (sqlDataReader.Read())
+            {                
+                livros.Add(new Livro
+                {
+                    Id = (int)sqlDataReader["Id"],
+                    Nome = (string)sqlDataReader["Nome"],
+                    DataLancamento = (DateTime)sqlDataReader["DataLancamento"],
+                    AutorLivro = new Autor { Id = (int)sqlDataReader["IdAutor"] }
+
+                }) ;
             }
-            return Task.FromResult(livros[id]);
 
-        }
-        public Task<List<Livro>> Obter(string nomeLivro)
-        {
-            return Task.FromResult(livros.Values.Where(livro => livro.AutorLivro.Nome.Equals(nomeLivro)).ToList());
-        }
-        public Task Inserir(Livro livro)
-        {
-            livros.Add(livro.Id, livro);
-            return Task.CompletedTask;
-        }
-        public Task Atualizar(Livro livro)
-        {
-            livros[livro.Id] = livro;
-            return Task.CompletedTask;
-        }      
+            await sqlConnection.CloseAsync();
 
-        public Task Remover(int id)
-        {
-            livros.Remove(id);
-            return Task.CompletedTask;
+            return livros;
         }
+        public async Task<Livro> Obter(int id)
+        {
+            Livro livro = null;
+            var comando = $"select * from Livro where Id = '{id}'";
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+            while (sqlDataReader.Read())
+            {
+                livro = new Livro
+                {
+                    Id = (int)sqlDataReader["Id"],
+                    Nome = (string)sqlDataReader["Nome"],
+                    DataLancamento = (DateTime)sqlDataReader["DataLancamento"],
+                    AutorLivro = new Autor { Id = (int)sqlDataReader["IdAutor"] }
+
+                };          
+                              
+            }
+
+            await sqlConnection.CloseAsync();
+
+            return livro;
+        }
+
+
+        public async Task<List<Livro>> Obter(string nome)
+        {
+            var livros = new List<Livro>();
+            var comando = $"select * from Livro where Nome = '{nome}'";
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+            while (sqlDataReader.Read())
+            {
+                livros.Add(new Livro
+                {
+                    Id = (int)sqlDataReader["Id"],
+                    Nome = (string)sqlDataReader["Nome"],
+                    DataLancamento = (DateTime)sqlDataReader["DataLancamento"],
+                    AutorLivro = new Autor { Id = (int)sqlDataReader["IdAutor"] }
+
+                });
+            }
+            await sqlConnection.CloseAsync();
+
+            return livros;
+        }
+        public async Task Atualizar(Livro livro)
+        {
+            var comando = $"update livro set Nome = '{livro.Nome}', DataLancamento = '{livro.DataLancamento}', IdAutor = '{livro.AutorLivro.Id}' where Id = '{livro.Id}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
+        }
+               
+        public async Task Inserir(Livro livro)
+        {
+            var comando = $"insert Livro ( Nome, DataLancamento, IdAutor) values ('{livro.Nome}', '{livro.DataLancamento}', {livro.AutorLivro.Id})";
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
+        }     
+               
+        public async Task Remover(int id)
+        {
+            var comando = $"delete from Livro where Id = '{id}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();
         }
+
     }
 
 }

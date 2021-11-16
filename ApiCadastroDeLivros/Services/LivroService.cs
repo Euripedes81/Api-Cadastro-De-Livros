@@ -19,7 +19,7 @@ namespace ApiCadastroDeLivros.Services
         }  
         public async Task<LivroViewModel> Inserir(LivroInputModel livro )
         {
-            Random rd = new Random();
+            //Random rd = new Random();
             var listaLivro = await _livroRepository.Obter(livro.Nome);
             if(listaLivro.Count > 0)
             {
@@ -28,7 +28,7 @@ namespace ApiCadastroDeLivros.Services
 
             var livroInsert = new Livro
             {
-                Id = rd.Next(),
+                //Id = rd.Next(),
                 Nome = livro.Nome,
                 DataLancamento = livro.DataLancamento,
                 AutorLivro = new Autor { Id = livro.IdAutor}
@@ -37,7 +37,7 @@ namespace ApiCadastroDeLivros.Services
 
             return new LivroViewModel
             {
-                Id = livroInsert.Id,
+                //Id = livroInsert.Id,
                 Nome = livroInsert.Nome,
                 DataLancamento = livroInsert.DataLancamento,
                 AutorLivroViewModel = new AutorViewModel { Id = livroInsert.AutorLivro.Id, Nome = livroInsert.AutorLivro.Nome }
@@ -69,7 +69,7 @@ namespace ApiCadastroDeLivros.Services
                 Id = livro.Id,
                 Nome = livro.Nome,
                 DataLancamento = livro.DataLancamento,
-                AutorLivroViewModel = new ViewModels.AutorViewModel { Id = livro.Id, Nome = livro.Nome}
+                AutorLivroViewModel = new ViewModels.AutorViewModel { Id = livro.AutorLivro.Id}
             };
         }
         public async Task Atualizar(int id, LivroInputModel livro)

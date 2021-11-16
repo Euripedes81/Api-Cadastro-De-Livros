@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiCadastroDeLivros.InputModel
 {
@@ -13,7 +10,6 @@ namespace ApiCadastroDeLivros.InputModel
         public DateTime DataLancamento { get; set; }
 
         public int IdAutor { get; set; }
-        //[Required(ErrorMessage = "O Campo Autor é Obrigatório!")] 
-        //public AutorInputModel AutorLivro { get; set; }
+        
     }
 }
