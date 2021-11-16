@@ -34,9 +34,20 @@ namespace ApiCadastroDeLivros.Repositories
 
                 }) ;
             }
-
+            //sqlDataReader.Close();
             await sqlConnection.CloseAsync();
-
+            
+            foreach(var livro in livros)
+            {
+                var comandoAutor = $"select * from Autor where Id = {livro.AutorLivro.Id}";
+                await sqlConnection.OpenAsync();
+                SqlCommand sqlCommandAutor = new SqlCommand(comandoAutor, sqlConnection);
+                SqlDataReader sqlDataReaderAutor = await sqlCommandAutor.ExecuteReaderAsync();
+                sqlDataReaderAutor.Read();
+                livro.AutorLivro.Nome = (string)sqlDataReaderAutor["Nome"];
+                await sqlConnection.CloseAsync();
+            }
+           
             return livros;
         }
         public async Task<Livro> Obter(int id)
@@ -58,8 +69,16 @@ namespace ApiCadastroDeLivros.Repositories
                 };          
                               
             }
-
             await sqlConnection.CloseAsync();
+
+            var comandoAutor = $"select * from Autor where Id = {livro.AutorLivro.Id}";
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommandAutor = new SqlCommand(comandoAutor, sqlConnection);
+            SqlDataReader sqlDataReaderAutor = await sqlCommandAutor.ExecuteReaderAsync();
+            sqlDataReaderAutor.Read();
+            livro.AutorLivro.Nome = (string)sqlDataReaderAutor["Nome"];
+            await sqlConnection.CloseAsync();
+
 
             return livro;
         }

@@ -69,7 +69,7 @@ namespace ApiCadastroDeLivros.Services
                 Id = livro.Id,
                 Nome = livro.Nome,
                 DataLancamento = livro.DataLancamento,
-                AutorLivroViewModel = new ViewModels.AutorViewModel { Id = livro.AutorLivro.Id}
+                AutorLivroViewModel = new ViewModels.AutorViewModel { Id = livro.AutorLivro.Id, Nome = livro.AutorLivro.Nome}
             };
         }
         public async Task Atualizar(int id, LivroInputModel livro)
