@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ApiCadastroDeLivros.InputModel
 {
     public class AutorInputModel
-    {
-        public int Id { get; set; }
+    {      
+       
+        [Required(ErrorMessage = "O Campo Nome é Obrigatório!")]
         public string Nome { get; set; }
     }
 }

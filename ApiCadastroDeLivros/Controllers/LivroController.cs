@@ -50,9 +50,9 @@ namespace ApiCadastroDeLivros.Controllers
                 var livro = await _livroService.Inserir(livroInputModel);
                 return base.Ok((object)livro);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return null;
+                return UnprocessableEntity("Livro existente ou Id do Autor inválida!");
             }
         }
         [HttpPut("{idLivro}")]

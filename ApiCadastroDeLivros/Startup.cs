@@ -23,7 +23,10 @@ namespace ApiCadastroDeLivros
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ILivroService, LivroService>();
-            services.AddScoped<IRepository<Livro>, LivroRepository>();
+            services.AddScoped<IAutorService, AutorService>();
+            services.AddScoped<IRepository<Livro>, LivroRepository>();            
+            services.AddScoped<IRepository<Autor>, AutorRepository>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

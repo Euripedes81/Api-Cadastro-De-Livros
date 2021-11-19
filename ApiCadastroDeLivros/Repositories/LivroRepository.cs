@@ -33,11 +33,13 @@ namespace ApiCadastroDeLivros.Repositories
                     AutorLivro = new Autor { Id = (int)sqlDataReader["IdAutor"] }
 
                 }) ;
-            }
-            //sqlDataReader.Close();
+            }            
             await sqlConnection.CloseAsync();
-            
-            foreach(var livro in livros)
+            if (livros == null)
+            {
+                return null;
+            }
+            foreach (var livro in livros)
             {
                 var comandoAutor = $"select * from Autor where Id = {livro.AutorLivro.Id}";
                 await sqlConnection.OpenAsync();
@@ -70,7 +72,10 @@ namespace ApiCadastroDeLivros.Repositories
                               
             }
             await sqlConnection.CloseAsync();
-
+            if(livro == null)
+            {
+                return null;
+            }
             var comandoAutor = $"select * from Autor where Id = {livro.AutorLivro.Id}";
             await sqlConnection.OpenAsync();
             SqlCommand sqlCommandAutor = new SqlCommand(comandoAutor, sqlConnection);

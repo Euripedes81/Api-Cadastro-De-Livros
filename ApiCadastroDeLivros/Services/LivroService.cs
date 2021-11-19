@@ -19,16 +19,15 @@ namespace ApiCadastroDeLivros.Services
         }  
         public async Task<LivroViewModel> Inserir(LivroInputModel livro )
         {
-            //Random rd = new Random();
+            
             var listaLivro = await _livroRepository.Obter(livro.Nome);
             if(listaLivro.Count > 0)
             {
-                throw new Exception();
+                throw new Exception("Nome do livro existente ou id do autor inválida!");
             }
 
             var livroInsert = new Livro
             {
-                //Id = rd.Next(),
                 Nome = livro.Nome,
                 DataLancamento = livro.DataLancamento,
                 AutorLivro = new Autor { Id = livro.IdAutor}
@@ -37,7 +36,6 @@ namespace ApiCadastroDeLivros.Services
 
             return new LivroViewModel
             {
-                //Id = livroInsert.Id,
                 Nome = livroInsert.Nome,
                 DataLancamento = livroInsert.DataLancamento,
                 AutorLivroViewModel = new AutorViewModel { Id = livroInsert.AutorLivro.Id, Nome = livroInsert.AutorLivro.Nome }
