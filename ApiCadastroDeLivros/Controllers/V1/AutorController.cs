@@ -1,7 +1,6 @@
 ﻿using ApiCadastroDeLivros.InputModel;
 using ApiCadastroDeLivros.Services;
 using ApiCadastroDeLivros.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiCadastroDeLivros.Controllers
+namespace ApiCadastroDeLivros.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class AutorController : ControllerBase
     {
@@ -59,10 +58,10 @@ namespace ApiCadastroDeLivros.Controllers
         }
 
         /// <summary>
-        /// Inserir um Autor no catálogo
+        /// Inserir um Autor
         /// </summary>
         /// <param name="autorInputModel">Dados do Autor a ser inserido</param>
-        /// <response code="200">Cao o Autor seja inserido com sucesso</response>
+        /// <response code="200">Caso o Autor seja inserido com sucesso</response>
         /// <response code="422">Caso já exista um Autor com mesmo nome para a mesma produtora</response>   
         [HttpPost]
         public async Task<ActionResult<AutorViewModel>> InserirAutor([FromBody] AutorInputModel autorInputModel)
@@ -79,7 +78,7 @@ namespace ApiCadastroDeLivros.Controllers
         }
 
         /// <summary>
-        /// Atualizar um Autor no catálogo
+        /// Atualizar um Autor
         /// </summary>
         /// /// <param name="idAutor">Id do Autor a ser atualizado</param>
         /// <param name="autorInputModel">Novos dados para atualizar o Autor indicado</param>

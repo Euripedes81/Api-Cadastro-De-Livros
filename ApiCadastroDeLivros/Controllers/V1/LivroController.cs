@@ -8,9 +8,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiCadastroDeLivros.Controllers
+namespace ApiCadastroDeLivros.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class LivroController : ControllerBase
     {
@@ -60,11 +60,11 @@ namespace ApiCadastroDeLivros.Controllers
         }
 
         /// <summary>
-        /// Inserir um Livro no catálogo
+        /// Inserir um Livro 
         /// </summary>
         /// <param name="livroInputModel">Dados do Livro a ser inserido</param>
-        /// <response code="200">Cao o Livro seja inserido com sucesso</response>
-        /// <response code="422">Caso já exista um Livro com mesmo nome para a mesma produtora</response>   
+        /// <response code="200">Caso o Livro seja inserido com sucesso</response>
+        /// <response code="422">Caso já exista um Livro cadastrado</response>   
         [HttpPost]
         public async Task<ActionResult<LivroViewModel>> InserirLivro([FromBody] LivroInputModel livroInputModel)
         {
@@ -80,11 +80,11 @@ namespace ApiCadastroDeLivros.Controllers
         }
 
         /// <summary>
-        /// Atualizar um Livro no catálogo
+        /// Atualizar um Livro
         /// </summary>
         /// /// <param name="idLivro">Id do Livro a ser atualizado</param>
         /// <param name="livroInputModel">Novos dados para atualizar o Livro indicado</param>
-        /// <response code="200">Cao o Livro seja atualizado com sucesso</response>
+        /// <response code="200">Caso o Livro seja atualizado com sucesso</response>
         /// <response code="404">Caso não exista um Livro com este Id</response>   
         [HttpPut("{idLivro}")]
         public async Task<ActionResult> AtualizarLivro ([FromRoute] int idLivro, [FromBody] LivroInputModel livroInputModel)

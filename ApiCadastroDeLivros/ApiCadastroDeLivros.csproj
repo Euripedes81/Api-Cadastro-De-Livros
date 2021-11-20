@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\NovaPasta\**" />
+    <Content Remove="Controllers\NovaPasta\**" />
+    <EmbeddedResource Remove="Controllers\NovaPasta\**" />
+    <None Remove="Controllers\NovaPasta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>

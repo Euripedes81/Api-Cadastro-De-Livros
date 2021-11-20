@@ -4,7 +4,7 @@
         <name>ApiCadastroDeLivros</name>
     </assembly>
     <members>
-        <member name="M:ApiCadastroDeLivros.Controllers.AutorController.Obter(System.Int32,System.Int32)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.AutorController.Obter(System.Int32,System.Int32)">
             <summary>
             Buscar todos os Autores de forma paginada
             </summary>
@@ -16,7 +16,7 @@
             <response code="200">Retorna a lista de Autores</response>
             <response code="204">Caso não haja Autores</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.AutorController.Obter(System.Int32)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.AutorController.Obter(System.Int32)">
             <summary>
             Buscar um Autor pelo seu Id
             </summary>
@@ -24,24 +24,24 @@
             <response code="200">Retorna o Autor filtrado</response>
             <response code="204">Caso não haja Autor com este id</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.AutorController.InserirAutor(ApiCadastroDeLivros.InputModel.AutorInputModel)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.AutorController.InserirAutor(ApiCadastroDeLivros.InputModel.AutorInputModel)">
             <summary>
-            Inserir um Autor no catálogo
+            Inserir um Autor
             </summary>
             <param name="autorInputModel">Dados do Autor a ser inserido</param>
-            <response code="200">Cao o Autor seja inserido com sucesso</response>
+            <response code="200">Caso o Autor seja inserido com sucesso</response>
             <response code="422">Caso já exista um Autor com mesmo nome para a mesma produtora</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.AutorController.AtualizarLivro(System.Int32,ApiCadastroDeLivros.InputModel.AutorInputModel)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.AutorController.AtualizarLivro(System.Int32,ApiCadastroDeLivros.InputModel.AutorInputModel)">
             <summary>
-            Atualizar um Autor no catálogo
+            Atualizar um Autor
             </summary>
             /// <param name="idAutor">Id do Autor a ser atualizado</param>
             <param name="autorInputModel">Novos dados para atualizar o Autor indicado</param>
             <response code="200">Caso o Autor seja atualizado com sucesso</response>
             <response code="404">Caso não exista um Autor com este Id</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.AutorController.ApagarAutor(System.Int32)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.AutorController.ApagarAutor(System.Int32)">
             <summary>
             Excluir um Autor
             </summary>
@@ -49,7 +49,7 @@
             <response code="200">Caso o Autor seja excluído com sucesso</response>
             <response code="404">Caso não exista um Autor com este Id</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.LivroController.Obter(System.Int32,System.Int32)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.LivroController.Obter(System.Int32,System.Int32)">
             <summary>
             Buscar todos os Livros de forma paginada
             </summary>
@@ -61,7 +61,7 @@
             <response code="200">Retorna a lista de Livros</response>
             <response code="204">Caso não haja Livros</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.LivroController.Obter(System.Int32)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.LivroController.Obter(System.Int32)">
             <summary>
             Buscar um Livro pelo seu Id
             </summary>
@@ -69,24 +69,24 @@
             <response code="200">Retorna o Livro filtrado</response>
             <response code="204">Caso não haja Livro com este id</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.LivroController.InserirLivro(ApiCadastroDeLivros.InputModel.LivroInputModel)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.LivroController.InserirLivro(ApiCadastroDeLivros.InputModel.LivroInputModel)">
             <summary>
-            Inserir um Livro no catálogo
+            Inserir um Livro 
             </summary>
             <param name="livroInputModel">Dados do Livro a ser inserido</param>
-            <response code="200">Cao o Livro seja inserido com sucesso</response>
-            <response code="422">Caso já exista um Livro com mesmo nome para a mesma produtora</response>   
+            <response code="200">Caso o Livro seja inserido com sucesso</response>
+            <response code="422">Caso já exista um Livro cadastrado</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.LivroController.AtualizarLivro(System.Int32,ApiCadastroDeLivros.InputModel.LivroInputModel)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.LivroController.AtualizarLivro(System.Int32,ApiCadastroDeLivros.InputModel.LivroInputModel)">
             <summary>
-            Atualizar um Livro no catálogo
+            Atualizar um Livro
             </summary>
             /// <param name="idLivro">Id do Livro a ser atualizado</param>
             <param name="livroInputModel">Novos dados para atualizar o Livro indicado</param>
-            <response code="200">Cao o Livro seja atualizado com sucesso</response>
+            <response code="200">Caso o Livro seja atualizado com sucesso</response>
             <response code="404">Caso não exista um Livro com este Id</response>   
         </member>
-        <member name="M:ApiCadastroDeLivros.Controllers.LivroController.ApagarLivro(System.Int32)">
+        <member name="M:ApiCadastroDeLivros.Controllers.V1.LivroController.ApagarLivro(System.Int32)">
             <summary>
             Excluir um Livro
             </summary>
