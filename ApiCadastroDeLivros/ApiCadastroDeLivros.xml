@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiCadastroDeLivros</name>
+    </assembly>
+    <members>
+        <member name="M:ApiCadastroDeLivros.Controllers.LivroController.ApagarLivro(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idLivro"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

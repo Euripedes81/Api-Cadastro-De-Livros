@@ -21,7 +21,7 @@ namespace ApiCadastroDeLivros.Services
             var listaAutor = await _autorRepository.Obter(autor.Nome);
             if (listaAutor.Count > 0)
             {
-                throw new Exception("Nome do Autor existente!");
+                throw new Exception("Nome do Autor já existe!");
             }
 
             var autorInsert = new Autor
@@ -51,7 +51,7 @@ namespace ApiCadastroDeLivros.Services
             var autor = await _autorRepository.Obter(id);
             if (autor == null)
             {
-                return null;
+                throw new Exception("Este Autor não existe!");
             }
             return new AutorViewModel
             {

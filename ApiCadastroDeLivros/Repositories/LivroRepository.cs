@@ -142,7 +142,8 @@ namespace ApiCadastroDeLivros.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            sqlConnection?.Close();
+            sqlConnection?.Dispose();
         }
 
     }

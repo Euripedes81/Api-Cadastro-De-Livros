@@ -20,7 +20,7 @@ namespace ApiCadastroDeLivros.Controllers
         {
             _livroService = livroService;
         }
-        
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LivroViewModel>>> Obter([FromQuery, Range(1, int.MaxValue)] int pagina = 1, [FromQuery, Range(1, 50)] int quantidade = 5)
         {
@@ -31,6 +31,7 @@ namespace ApiCadastroDeLivros.Controllers
 
             return Ok(livros);
         }
+        
         [HttpGet("{idLivro}")]
         public async Task<ActionResult<LivroViewModel>> Obter([FromRoute] int idLivro)
         {
@@ -41,7 +42,7 @@ namespace ApiCadastroDeLivros.Controllers
             }
             return Ok(livro);
         }
-
+        
         [HttpPost]
         public async Task<ActionResult<LivroViewModel>> InserirLivro([FromBody] LivroInputModel livroInputModel)
         {
@@ -55,6 +56,7 @@ namespace ApiCadastroDeLivros.Controllers
                 return UnprocessableEntity("Livro existente ou Id do Autor inválida!");
             }
         }
+        
         [HttpPut("{idLivro}")]
         public async Task<ActionResult> AtualizarLivro ([FromRoute] int idLivro, [FromBody] LivroInputModel livro)
         {
@@ -69,6 +71,11 @@ namespace ApiCadastroDeLivros.Controllers
                 return NotFound("Não existe este Livro");
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idLivro"></param>
+        /// <returns></returns>
         [HttpDelete("{idLivro}")]
         public async Task<ActionResult> ApagarLivro([FromRoute] int idLivro)
         {

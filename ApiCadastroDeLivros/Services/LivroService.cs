@@ -75,7 +75,7 @@ namespace ApiCadastroDeLivros.Services
             var entidadeLivro = await _livroRepository.Obter(id);
             if(entidadeLivro == null)
             {
-                throw new NotImplementedException();
+                throw new Exception("Este Livro não existe!");
             }
             entidadeLivro.Nome = livro.Nome;
             entidadeLivro.DataLancamento = livro.DataLancamento;
